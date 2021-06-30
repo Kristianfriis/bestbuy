@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/Kristianfriis/bestbuy/routes"
 	"github.com/Kristianfriis/bestbuy/test"
 	"github.com/gofiber/fiber/v2"
 )
@@ -8,9 +9,16 @@ import (
 func main() {
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString(test.Test())
-	})
+	setupRoutes(app)
 
 	app.Listen(":3000")
+}
+
+func setupRoutes(app *fiber.App) {
+	// app.Get("/test", testRoutes)
+	routes.Base(app)
+}
+
+func testRoutes(c *fiber.Ctx) {
+	c.SendString(test.Test())
 }
